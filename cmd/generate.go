@@ -12,9 +12,9 @@ import (
 )
 
 const (
-	expiryTimeFlag     = "expiry-time"
-	publicKeyFileFlag  = "public-key-file"
-	privateKeyFileFlag = "private-key-file"
+	expiryTimeFlag           = "expiry-time"
+	publicKeyFileFlag        = "public-key-file"
+	privateKeyFileFlag       = "private-key-file"
 	defaultExpiryTime        = 5
 	defaultPublicKeyPEMFile  = "public.pem"
 	defaultPrivateKeyPEMFile = "private.pem"
@@ -29,7 +29,7 @@ type GCParams struct {
 var generateCmd = &cobra.Command{
 	Use:   "generate",
 	Short: "Generates a Service Account's Public/Private Keys",
-	Long: fmt.Sprintf("Generates a Service Account Key Pair and saves it in two files (default destinations %s " +
+	Long: fmt.Sprintf("Generates a Service Account Key Pair and saves it in two files (default destinations %s "+
 		"and %s), use --%s and --%s flags to change destinations",
 		defaultPublicKeyPEMFile, defaultPrivateKeyPEMFile, publicKeyFileFlag, privateKeyFileFlag),
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -100,8 +100,6 @@ func saveKey(filename string, keyBites []byte) {
 	nB, err := publicPemFile.Write(keyBites)
 	log.Debugf("wrote %d bytes", nB)
 }
-
-
 
 type privateJsonFields struct {
 	ProjectId    string

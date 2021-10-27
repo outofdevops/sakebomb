@@ -19,22 +19,22 @@ func Test_certTemplate(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name:    "valid",
+			name: "valid",
 			args: args{
 				notBefore: now,
-				notAfter: now.Add(5 * time.Minute),
+				notAfter:  now.Add(5 * time.Minute),
 			},
-			want:    x509.Certificate{
+			want: x509.Certificate{
 				NotBefore: now,
-				NotAfter: now.Add(5 * time.Minute),
+				NotAfter:  now.Add(5 * time.Minute),
 			},
 			wantErr: false,
 		},
 		{
-			name:    "invalid",
+			name: "invalid",
 			args: args{
 				notBefore: now,
-				notAfter: now.Add(-5 * time.Minute),
+				notAfter:  now.Add(-5 * time.Minute),
 			},
 			want:    x509.Certificate{},
 			wantErr: true,
@@ -54,6 +54,6 @@ func Test_certTemplate(t *testing.T) {
 	}
 }
 
-func validDates(got, want x509.Certificate)  bool {
+func validDates(got, want x509.Certificate) bool {
 	return got.NotBefore.Equal(want.NotBefore) && got.NotAfter.Equal(want.NotAfter)
 }
