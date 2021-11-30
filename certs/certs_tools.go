@@ -45,7 +45,11 @@ func GenerateKeysAndCertExpiringIn(minutes int) (public []byte, private []byte, 
 		return nil, nil, fmt.Errorf("failed to PEM encode certificate")
 	}
 
-	var privateKeyBytes []byte = x509.MarshalPKCS1PrivateKey(privateKey)
+
+	privateKeyBytes, err := x509.MarshalPKCS8PrivateKey(privateKey)
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to marshal PKCS8PrivateKey: %v", err)
+	}
 	privateKeyBlock := &pem.Block{
 		Type:  "PRIVATE KEY",
 		Bytes: privateKeyBytes,
